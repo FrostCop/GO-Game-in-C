@@ -35,3 +35,30 @@ int SameValue(int *board, int rows, int columns, int i, int j, int value)
 {
     return (*(board + (columns * i) + j) == value);
 }
+
+void CopyMatrix(int *matrixSrc, int *matrixDst, int rows, int columns)
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < columns; j++)
+        {
+            *(matrixDst + (columns * i) + j) = *(matrixSrc + (columns * i) + j);
+        }
+    }
+}
+
+int MatricesEqual(int *matrix1, int *matrix2, int rows, int columns)
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < columns; j++)
+        {
+            if(*(matrix1 + (columns * i) + j) != *(matrix2 + (columns * i) + j))
+            {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}

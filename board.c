@@ -134,7 +134,7 @@ void CheckLiberties(int *board, int rows, int columns, int i, int j)
     free(newAlreadyCheckedMatrix);
 }
 
-int MakeMove(int *board,  int rows, int columns, int i, int j, int blackTurn)
+int MakeMove(int *board,  int rows, int columns, int i, int j, int blackTurn, int *previousBoardBlackTurn, int *previousBoardWhiteTurn)
 {
     if(!InBounds(i, 0, rows) || !InBounds(j, 0, columns))
     {
@@ -143,7 +143,7 @@ int MakeMove(int *board,  int rows, int columns, int i, int j, int blackTurn)
     if(*(board + (columns * i) + j) != 0)
     {
         return 2;
-    }
+    }    
 
     *(board + (columns * i) + j) = (blackTurn ? 1 : -1);
 
@@ -188,6 +188,16 @@ int MakeMove(int *board,  int rows, int columns, int i, int j, int blackTurn)
         free(newAlreadyCheckedMatrix[k]);
     }
     free(newAlreadyCheckedMatrix);
+
+    if(MatricesEqual(board, (blackTurn ? previousBoardBlackTurn : previousBoardWhiteTurn), rows, columns))
+    {
+        //Reversing the move
+        CopyMatrix(blackTurn ? previousBoardWhiteTurn : previousBoardBlackTurn, board, rows, columns);
+
+        return 4;
+    }
+
+    CopyMatrix(board, (blackTurn ? previousBoardBlackTurn : previousBoardWhiteTurn), rows, columns);
 
     return 0;
 }

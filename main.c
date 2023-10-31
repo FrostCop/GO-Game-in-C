@@ -12,6 +12,11 @@ int main(int argc, int *argv[])
 
     int board[rows][columns]; //1 is black, 0 is empty, -1 is white
     InitializeBoard(&(board[0][0]), rows, columns);
+    
+    int previousBoardBlackTurn[rows][columns];
+    CopyMatrix(&(board[0][0]), &(previousBoardBlackTurn[0][0]), rows, columns);
+    int previousBoardWhiteTurn[rows][columns];
+    CopyMatrix(&(board[0][0]), &(previousBoardWhiteTurn[0][0]), rows, columns);
 
     int blackTurn = 1;
     
@@ -35,7 +40,7 @@ int main(int argc, int *argv[])
             {
                 int i = ScanRowIndex();
                 int j = ScanColumnIndex();
-                moveOutCome = MakeMove(&(board[0][0]), rows, columns, i, j, blackTurn);
+                moveOutCome = MakeMove(&(board[0][0]), rows, columns, i, j, blackTurn, &(previousBoardBlackTurn[0][0]), &(previousBoardWhiteTurn[0][0]));
 
                 PrintMoveOutcome(moveOutCome);
             }

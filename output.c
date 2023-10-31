@@ -76,6 +76,9 @@ void PrintMoveOutcome(int moveOutcome)
         case 3:
             printf("You can't play a suicide move\n");
             break;
+        case 4:
+            printf("You can't play there immediately because of Ko\n");
+            break;
     }
 }
 
