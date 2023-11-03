@@ -96,3 +96,13 @@ void PrintChoiceOption()
 {    
     printf("Choose:\n1 = Play a move\n2 = Pass\n");
 }
+
+void PrintGameEnded()
+{
+    printf("The game ended because both players passed\n");
+}
+
+void PrintScore(int scoreBlack, int scoreWhite)
+{
+    printf("The score (with Chinese scoring system) is:\nBlack: %d\nWhite: %d\n", scoreBlack, scoreWhite);
+}

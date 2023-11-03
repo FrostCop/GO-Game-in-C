@@ -2,8 +2,7 @@
 #include "input.c"
 #include "output.c"
 #include "board.c"
-
-//TODO: Insert Ko and Score counting
+#include "score.c"
 
 int main(int argc, int *argv[]) 
 {
@@ -17,6 +16,8 @@ int main(int argc, int *argv[])
     CopyMatrix(&(board[0][0]), &(previousBoardBlackTurn[0][0]), rows, columns);
     int previousBoardWhiteTurn[rows][columns];
     CopyMatrix(&(board[0][0]), &(previousBoardWhiteTurn[0][0]), rows, columns);
+
+    int lastPlayerPassed = 0;
 
     int blackTurn = 1;
     
@@ -46,10 +47,23 @@ int main(int argc, int *argv[])
             }
             while(moveOutCome != 0);
             
+            lastPlayerPassed = 0;
             blackTurn = !blackTurn;
         }
         if(choice == 2)
         {
+            if(lastPlayerPassed)
+            {
+                printf("\n\n");
+                PrintGameEnded();
+
+                printf("\n");
+                CountScore(&(board[0][0]), rows, columns);
+
+                return 0;
+            }
+            
+            lastPlayerPassed = 1;
             blackTurn = !blackTurn;
         }
         else
